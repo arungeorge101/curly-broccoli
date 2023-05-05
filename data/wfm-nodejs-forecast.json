@@ -1,0 +1,3371 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 2717,
+  "iteration": 1683307456271,
+  "links": [],
+  "panels": [
+    {
+      "dashboardFilter": "",
+      "dashboardTags": [],
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "folderId": null,
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 627,
+      "limit": "1000",
+      "nameFilter": "",
+      "onlyAlertsOnDashboard": true,
+      "pluginVersion": "7.5.17",
+      "show": "current",
+      "sortOrder": 3,
+      "stateFilter": [
+        "ok",
+        "paused",
+        "execution_error",
+        "alerting",
+        "pending"
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Active Alerts",
+      "type": "alertlist"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 17,
+      "panels": [
+        {
+          "aliasColors": {
+            "cartcompsvc-releasev3-v005-fd2wl - TPS": "light-red",
+            "cartcompsvc-releasev3-v007-d4vk4": "semi-dark-purple",
+            "external.googleapis.com/prometheus/responses_count": "rgb(201, 26, 120)"
+          },
+          "bars": false,
+          "cacheTimeout": null,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 9
+          },
+          "hiddenSeries": false,
+          "id": 21,
+          "legend": {
+            "alignAsTable": false,
+            "avg": true,
+            "current": false,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": true,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "options": {
+            "alertThreshold": true
+          },
+          "paceLength": 10,
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 1,
+          "points": false,
+          "renderer": "flot",
+          "repeatDirection": "h",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum by(path) (rate(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path!~\"/management.*\"}[1m]))",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "intervalFactor": 1,
+              "legendFormat": "{{path}}",
+              "refId": "A"
+            },
+            {
+              "exemplar": true,
+              "expr": "sum(rate(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path!~\"/management.*\"}[1m]))",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 1,
+              "legendFormat": "Total - ",
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Overall TPS",
+          "tooltip": {
+            "shared": true,
+            "sort": 1,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:302",
+              "decimals": null,
+              "format": "ops",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:303",
+              "format": "none",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "cacheTimeout": null,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 12,
+            "y": 9
+          },
+          "id": 19,
+          "interval": null,
+          "links": [],
+          "maxDataPoints": 100,
+          "options": {
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "text": {}
+          },
+          "pluginVersion": "7.5.17",
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(irate(istio_requests_total{reporter=\"destination\", pod_name=~\"daci-wfm-forecast-.*\", namespace=\"daci-wfm-forecast-ns\", response_code!~\"5.*\", response_code!~\"4.*\"}[5m])) / sum(irate(istio_requests_total{reporter=\"destination\", pod_name=~\"daci-wfm-forecast-.*\", namespace=\"daci-wfm-forecast-ns\"}[5m]))",
+              "format": "time_series",
+              "interval": "",
+              "intervalFactor": 1,
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Application Success Rate (non-5xx, 4xx responses)",
+          "type": "gauge"
+        },
+        {
+          "cacheTimeout": null,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 18,
+            "y": 9
+          },
+          "id": 23,
+          "links": [],
+          "options": {
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "delta"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "text": {}
+          },
+          "pluginVersion": "7.5.17",
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\",pod_name=~\"daci-wfm-forecast-.*\", path!~\".*/management/health\", path!~\".*/management/prometheus\"}[1m]))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Total Request",
+          "type": "gauge"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 15
+          },
+          "hiddenSeries": false,
+          "id": 629,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null as zero",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "(quantile(0.9,(sum(rate(responses_sum{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\"}[5m])) /\r\nsum(rate(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\"}[5m])))))\r",
+              "interval": "",
+              "legendFormat": "P90 ",
+              "refId": "A"
+            },
+            {
+              "exemplar": true,
+              "expr": "(quantile(0.95,(sum(rate(responses_sum{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\"}[5m])) /\r\nsum(rate(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\"}[5m])))))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "P95",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "(quantile(0.99,(sum(rate(responses_sum{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\"}[5m])) /\r\nsum(rate(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\"}[5m])))))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "P99",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": " Overall Latency",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:580",
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:581",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "cacheTimeout": null,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": null,
+              "mappings": [],
+              "max": "100",
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "#7EB26D",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 12,
+            "y": 15
+          },
+          "id": 25,
+          "links": [],
+          "options": {
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "delta"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "text": {}
+          },
+          "pluginVersion": "7.5.17",
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path!~\"​.*​/management​/health\", status=~\"2.*\", path!~\".*/management/prometheus\"}[1m]))",
+              "format": "time_series",
+              "interval": "",
+              "intervalFactor": 1,
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "2XX",
+          "type": "gauge"
+        },
+        {
+          "cacheTimeout": null,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 18,
+            "y": 15
+          },
+          "id": 281,
+          "links": [],
+          "options": {
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "delta"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "text": {}
+          },
+          "pluginVersion": "7.5.17",
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", status!~\"2.*\", path!~\".*/management/health\", path!~\".*/management/prometheus\"}[1m]))",
+              "format": "time_series",
+              "interval": "",
+              "intervalFactor": 1,
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "4xx & 5xx",
+          "type": "gauge"
+        }
+      ],
+      "title": "Application Overview",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 33,
+      "panels": [
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 5,
+            "x": 0,
+            "y": 10
+          },
+          "id": 39,
+          "options": {
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "text": {}
+          },
+          "pluginVersion": "7.5.17",
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "count by (image) (kube_pod_info{namespace=\"daci-wfm-forecast-ns\",pod=~\"daci-wfm-forecast-.*\"})",
+              "interval": "",
+              "legendFormat": "{{image}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Pod count",
+          "type": "gauge"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 19,
+            "x": 5,
+            "y": 10
+          },
+          "hiddenSeries": false,
+          "id": 35,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "max",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "options": {
+            "alertThreshold": true
+          },
+          "paceLength": 10,
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "(\n  100 *\n    sum(\n      rate(container_cpu_usage_seconds_total{pod!=\"\",namespace=\"daci-wfm-forecast-ns\",pod=~\"(daci-wfm-forecast-).*\",container!=\"POD\",image!=\"\"}[1m])\n    ) by (pod,container)\n      /\n    sum(\n      kube_pod_container_resource_limits{namespace=\"daci-wfm-forecast-ns\",pod=~\"(daci-wfm-forecast-).*\",unit=\"core\"}\n    ) by (pod,container)\n)",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "CPU Usage %",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:117",
+              "format": "percent",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:118",
+              "decimals": null,
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "alert": {
+            "alertRuleTags": {
+              "Application": "WFM Forecast",
+              "Metric": "CPU Core",
+              "Paging_Priority": "P1",
+              "Platform": "OnPrem WSDC",
+              "Product": "WFM",
+              "Service": "WFM Forecast",
+              "Support_Service": "ERE-McLaren"
+            },
+            "conditions": [
+              {
+                "evaluator": {
+                  "params": [
+                    1.5
+                  ],
+                  "type": "gt"
+                },
+                "operator": {
+                  "type": "and"
+                },
+                "query": {
+                  "params": [
+                    "A",
+                    "15m",
+                    "now"
+                  ]
+                },
+                "reducer": {
+                  "params": [],
+                  "type": "avg"
+                },
+                "type": "query"
+              }
+            ],
+            "executionErrorState": "alerting",
+            "for": "10m",
+            "frequency": "1m",
+            "handler": 1,
+            "message": "Platform: WFM\nApplication: WFM Forecast\nEndpoint: WFM Forecast\nPriority: P1\nMessage: CPU usage exceeding the given request cores: please validate the service: and keep an eye",
+            "name": "P1-  WFM - Store Alignment - CPU usage Cores alert",
+            "noDataState": "ok",
+            "notifications": [
+              {
+                "uid": "aF4R4sA7k"
+              }
+            ]
+          },
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 18
+          },
+          "hiddenSeries": false,
+          "id": 37,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "paceLength": 10,
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "exemplar": true,
+              "expr": "(sum(irate(container_cpu_usage_seconds_total{namespace=\"daci-wfm-forecast-ns\",pod=~\"daci-wfm-forecast-.*.\",container=\"app\"}[1m])) by (pod))",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "{{pod}}",
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "",
+              "refId": "A",
+              "timeField": "@timestamp"
+            },
+            {
+              "exemplar": true,
+              "expr": "avg(kube_pod_container_resource_limits{namespace=\"daci-wfm-forecast-ns\",pod=~\"daci-wfm-forecast-.*.\", unit=\"core\", container=\"app\"})  ",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Limit",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "avg(kube_pod_container_resource_requests{namespace=\"daci-wfm-forecast-ns\",pod=~\"daci-wfm-forecast-.*.\",unit=\"core\", container=\"app\"})",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Request",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 1.5,
+              "visible": true
+            }
+          ],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "CPU usage Cores",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "cores",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "alert": {
+            "alertRuleTags": {
+              "Application": "WFM Forecast",
+              "Metric": "Memory",
+              "Paging_Priority": "P1",
+              "Platform": "OnPrem WSDC",
+              "Product": "WFM",
+              "Service": "WFM Forecast",
+              "Support_Service": "ERE-McLaren"
+            },
+            "conditions": [
+              {
+                "evaluator": {
+                  "params": [
+                    3640000000
+                  ],
+                  "type": "gt"
+                },
+                "operator": {
+                  "type": "and"
+                },
+                "query": {
+                  "params": [
+                    "A",
+                    "5m",
+                    "now"
+                  ]
+                },
+                "reducer": {
+                  "params": [],
+                  "type": "avg"
+                },
+                "type": "query"
+              }
+            ],
+            "executionErrorState": "alerting",
+            "for": "10m",
+            "frequency": "1m",
+            "handler": 1,
+            "message": "Platform: WFM\nApplication: WFM Forecast\nEndpoint: WFM Forecast\nPriority: P1\nMessage: Memory usage exceeding the given request threshold: please validate the service: and keep an eye",
+            "name": "P1- WFM - WFM Admin - Memory Usage alert",
+            "noDataState": "ok",
+            "notifications": [
+              {
+                "uid": "aF4R4sA7k"
+              }
+            ]
+          },
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "description": "This represents the total [CPU resource requests](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-cpu) in the cluster.\nFor comparison the total [allocatable CPU cores](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/node-allocatable.md) is also shown.",
+          "editable": true,
+          "error": false,
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "grid": {
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 25
+          },
+          "hiddenSeries": false,
+          "id": 41,
+          "isNew": false,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sideWidth": 400,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "Actual Usage",
+              "linewidth": 3
+            },
+            {
+              "alias": "Actual Usage",
+              "fill": 5
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "((sum by (pod) (container_memory_working_set_bytes{namespace=\"daci-wfm-forecast-ns\",container=\"app\",pod=~\"daci-wfm-forecast-.*.\"}))/(sum by (pod) (kube_pod_container_resource_limits{ namespace=\"daci-wfm-forecast-ns\",pod=~\"daci-wfm-forecast-.*.\", container=\"app\",unit=\"byte\"})))*1024*1024*1024",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "{{pod}}",
+              "refId": "A"
+            },
+            {
+              "exemplar": true,
+              "expr": "avg(kube_pod_container_resource_limits{namespace=\"daci-wfm-forecast-ns\",pod=~\"daci-wfm-forecast-.*.\", resource=\"memory\",container=\"app\"}) ",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Limit",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "avg(kube_pod_container_resource_requests{namespace=\"daci-wfm-forecast-ns\",pod=~\"daci-wfm-forecast-.*.\", resource=\"memory\",container=\"app\"}) ",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Request",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 3640000000,
+              "visible": true
+            }
+          ],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Memory",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": null,
+              "format": "bytes",
+              "label": "Memory",
+              "logBase": 1,
+              "min": "0",
+              "show": true
+            },
+            {
+              "decimals": null,
+              "format": "short",
+              "label": "",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Infrastructure ",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 283,
+      "panels": [],
+      "title": "API Level",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 11
+      },
+      "id": 596,
+      "panels": [
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 12
+          },
+          "id": 606,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "text": {},
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.5.17",
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", path=~\".*/getForecastHoursByDepartment\", status=\"200\",}[5m])) / sum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", path=~\".*/getForecastHoursByDepartment\"}[5m])) * 100",
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "/getForecastHoursByDepartment Availability",
+          "type": "stat"
+        },
+        {
+          "alert": {
+            "alertRuleTags": {
+              "Application": "wfmforecast",
+              "Metric": "Latency",
+              "Paging_Priority": "P1",
+              "Platform": "OnPrem WSDC",
+              "Product": "WFM",
+              "Service": "getForecastHoursByDepartment",
+              "Support_Service": "ERE-McLaren"
+            },
+            "conditions": [
+              {
+                "evaluator": {
+                  "params": [
+                    10000
+                  ],
+                  "type": "gt"
+                },
+                "operator": {
+                  "type": "and"
+                },
+                "query": {
+                  "params": [
+                    "A",
+                    "5m",
+                    "now"
+                  ]
+                },
+                "reducer": {
+                  "params": [],
+                  "type": "avg"
+                },
+                "type": "query"
+              }
+            ],
+            "executionErrorState": "keep_state",
+            "for": "5m",
+            "frequency": "1m",
+            "handler": 1,
+            "message": "Platform: OnPrem WSDC\nApplication: WFM\nService: wfmforecast\nNamespace: daci-wfm-forecast-ns\nEndpoint: ​getForecastHoursByDpartment \nPercentile: 95\nPriority: P1\nMessage: P95 latency threshold breached: please validate the service: and keep an eye\n\nhttps://grafana.wsdc-tlmy-prd01.carbon.lowes.com/d/iQ8n2ZfVz/wfm-forecast-nodejs-wsdc?tab=alert&editPanel=607&orgId=1&from=now-15m&to=now",
+            "name": "/getForecastHoursByDepartment Latency alert",
+            "noDataState": "ok",
+            "notifications": [
+              {
+                "uid": "aF4R4sA7k"
+              }
+            ]
+          },
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 6,
+            "y": 12
+          },
+          "hiddenSeries": false,
+          "id": 607,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null as zero",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "(quantile(0.9,(sum(increase(responses_sum{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getForecastHoursByDepartment\"}[5m])) /\r\nsum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getForecastHoursByDepartment\"}[5m])))))\r",
+              "interval": "",
+              "legendFormat": "P90",
+              "refId": "A"
+            },
+            {
+              "exemplar": true,
+              "expr": "(quantile(0.95,(sum(increase(responses_sum{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getForecastHoursByDepartment\"}[5m]))/\r\nsum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getForecastHoursByDepartment\"}[5m])))))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "P95",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "(quantile(0.99,(sum(increase(responses_sum{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\",path=~\".*​​/getForecastHoursByDepartment\"}[5m]))/\r\nsum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getForecastHoursByDepartment\"}[5m])))))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "P99",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 10000,
+              "visible": true
+            }
+          ],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "/getForecastHoursByDepartment Latency",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:2906",
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:2907",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "alert": {
+            "alertRuleTags": {
+              "Application": "WFM Forecast",
+              "Metric": "4xx",
+              "Pageing_Priority": "P1",
+              "Product": "DACI WFM",
+              "Service": "getForecastHoursByDepartment",
+              "Support_service": "ERE-McLaren"
+            },
+            "conditions": [
+              {
+                "evaluator": {
+                  "params": [
+                    5
+                  ],
+                  "type": "gt"
+                },
+                "operator": {
+                  "type": "and"
+                },
+                "query": {
+                  "params": [
+                    "A",
+                    "5m",
+                    "now"
+                  ]
+                },
+                "reducer": {
+                  "params": [],
+                  "type": "avg"
+                },
+                "type": "query"
+              }
+            ],
+            "executionErrorState": "alerting",
+            "for": "5m",
+            "frequency": "1m",
+            "handler": 1,
+            "message": "Platform: OnPrem WSDC\nApplication: WFM\nService: wfmforecast\nNamespace: daci-wfm-forecast-ns\nEndpoint: getForecastHoursByDepartment \nPriority: P1\nMessage: 4XX transactions threshold breached: please validate the service: and keep an eye",
+            "name": "/getForecastHoursByDepartment 4XX alert",
+            "noDataState": "no_data",
+            "notifications": [
+              {
+                "uid": "aF4R4sA7k"
+              }
+            ]
+          },
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 12,
+            "y": 12
+          },
+          "hiddenSeries": false,
+          "id": 608,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(rate(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getForecastHoursByDepartment\",status=~\"4.*\"}[1m]))by (status) OR vector (0)",
+              "interval": "",
+              "legendFormat": "{{status}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 5,
+              "visible": true
+            }
+          ],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "/getForecastHoursByDepartment 4XX",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "alert": {
+            "alertRuleTags": {
+              "Application": "WFM Forecast",
+              "Metric": "5xx",
+              "Paging_Priority": "P1",
+              "Product": "WFM Forecast",
+              "Service": "getForecastHoursByDepartment",
+              "Support_Service": "ERE-McLaren"
+            },
+            "conditions": [
+              {
+                "evaluator": {
+                  "params": [
+                    5
+                  ],
+                  "type": "gt"
+                },
+                "operator": {
+                  "type": "and"
+                },
+                "query": {
+                  "params": [
+                    "A",
+                    "5m",
+                    "now"
+                  ]
+                },
+                "reducer": {
+                  "params": [],
+                  "type": "avg"
+                },
+                "type": "query"
+              }
+            ],
+            "executionErrorState": "keep_state",
+            "for": "5m",
+            "frequency": "1m",
+            "handler": 1,
+            "message": "Platform: OnPrem WSDC\nApplication: WFM\nService: wfmforecast\nNamespace: daci-wfm-forecast-ns\nEndpoint: getForecastHoursByDepartment \nPriority: P1\nMessage: 5XX transactions threshold breached: please validate the service: and keep an eye",
+            "name": "/getForecastHoursByDepartment 5XX alert",
+            "noDataState": "ok",
+            "notifications": [
+              {
+                "uid": "aF4R4sA7k"
+              }
+            ]
+          },
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 18,
+            "y": 12
+          },
+          "hiddenSeries": false,
+          "id": 625,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(rate(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getForecastHoursByDepartment\",status=~\"5.*\"}[1m]))by (status) OR vector (0)",
+              "interval": "",
+              "legendFormat": "{{status}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 5,
+              "visible": true
+            }
+          ],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "/getForecastHoursByDepartment 5XX",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "getForecastHoursByDepartment",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 598,
+      "panels": [
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 13
+          },
+          "id": 610,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "text": {},
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.5.17",
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getActualHoursByDepartment\", status=\"200\",}[5m])) / sum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getActualHoursByDepartment\"}[5m])) * 100",
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "/getActualHoursByDepartment Availability",
+          "type": "stat"
+        },
+        {
+          "alert": {
+            "alertRuleTags": {
+              "Application": "WFM Forecast",
+              "Metric": "Latency",
+              "Pagign_Priority": "P1",
+              "Product": "WFM Forecast",
+              "Service": "getActualHoursByDepartment",
+              "Support_Service": "ERE-McLaren"
+            },
+            "conditions": [
+              {
+                "evaluator": {
+                  "params": [
+                    30000
+                  ],
+                  "type": "gt"
+                },
+                "operator": {
+                  "type": "and"
+                },
+                "query": {
+                  "params": [
+                    "A",
+                    "5m",
+                    "now"
+                  ]
+                },
+                "reducer": {
+                  "params": [],
+                  "type": "avg"
+                },
+                "type": "query"
+              }
+            ],
+            "executionErrorState": "keep_state",
+            "for": "5m",
+            "frequency": "1m",
+            "handler": 1,
+            "message": "Platform: OnPrem WSDC\nApplication: WFM\nService: wfmforecast\nNamespace: daci-wfm-forecast-ns\nEndpoint: getActualHoursByDepartment \nPriority: P1\nMessage: Latency threshold breached: please validate the service: and keep an eye",
+            "name": "/getActualHoursByDepartment Latency alert",
+            "noDataState": "ok",
+            "notifications": [
+              {
+                "uid": "aF4R4sA7k"
+              }
+            ]
+          },
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 6,
+            "y": 13
+          },
+          "hiddenSeries": false,
+          "id": 611,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null as zero",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "(quantile(0.9,(sum(increase(responses_sum{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getActualHoursByDepartment\"}[5m])) /\r\nsum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getActualHoursByDepartment\"}[5m])))))\r",
+              "interval": "",
+              "legendFormat": "P90",
+              "refId": "A"
+            },
+            {
+              "exemplar": true,
+              "expr": "(quantile(0.95,(sum(increase(responses_sum{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getActualHoursByDepartment\"}[5m]))/\r\nsum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getActualHoursByDepartment\"}[5m])))))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "P95",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "(quantile(0.99,(sum(increase(responses_sum{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\",path=~\".*​​/getActualHoursByDepartment\"}[5m]))/\r\nsum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getActualHoursByDepartment\"}[5m])))))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "P99",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 30000,
+              "visible": true
+            }
+          ],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "/getActualHoursByDepartment Latency",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:2752",
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:2753",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "alert": {
+            "alertRuleTags": {
+              "Application": "WFM Forecast",
+              "Metric": "4xx",
+              "Paging_Priority": "P3",
+              "Product": "WFM Forecast",
+              "Service": "getActualHoursByDepartment",
+              "Support_Service": "ERE-McLaren"
+            },
+            "conditions": [
+              {
+                "evaluator": {
+                  "params": [
+                    5
+                  ],
+                  "type": "gt"
+                },
+                "operator": {
+                  "type": "and"
+                },
+                "query": {
+                  "params": [
+                    "A",
+                    "5m",
+                    "now"
+                  ]
+                },
+                "reducer": {
+                  "params": [],
+                  "type": "avg"
+                },
+                "type": "query"
+              }
+            ],
+            "executionErrorState": "keep_state",
+            "for": "5m",
+            "frequency": "1m",
+            "handler": 1,
+            "message": "Platform: OnPrem WSDC\nApplication: WFM\nService: wfmforecast\nNamespace: daci-wfm-forecast-ns\nEndpoint: getActualHoursByDepartment \nPriority: P1\nMessage: 4XX transactions threshold breached: please validate the service: and keep an eye\n\nhttps://grafana.wsdc-tlmy-prd01.carbon.lowes.com/d/iQ8n2ZfVz/wfm-forecast-nodejs-wsdc?tab=alert&editPanel=612&orgId=1&from=now-15m&to=now",
+            "name": "/getArctualHoursByDepartment 4XX alert",
+            "noDataState": "keep_state",
+            "notifications": [
+              {
+                "uid": "aF4R4sA7k"
+              }
+            ]
+          },
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 12,
+            "y": 13
+          },
+          "hiddenSeries": false,
+          "id": 612,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(rate(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getArctualHoursByDepartment\",status=~\"4.*\"}[1m]))by (status) OR vector (0)",
+              "interval": "",
+              "legendFormat": "{{status}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 5,
+              "visible": true
+            }
+          ],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "/getActualHoursByDepartment 4XX",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:92",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:93",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "alert": {
+            "alertRuleTags": {
+              "Application": "WFM Forecast",
+              "Metric": "5xx",
+              "Paging_Priority": "P1",
+              "Product": "WFM Forecast",
+              "Service": "getActualHoursByDepartment",
+              "Support_Service": "ERE-McLaren"
+            },
+            "conditions": [
+              {
+                "evaluator": {
+                  "params": [
+                    5
+                  ],
+                  "type": "gt"
+                },
+                "operator": {
+                  "type": "and"
+                },
+                "query": {
+                  "params": [
+                    "A",
+                    "5m",
+                    "now"
+                  ]
+                },
+                "reducer": {
+                  "params": [],
+                  "type": "avg"
+                },
+                "type": "query"
+              }
+            ],
+            "executionErrorState": "keep_state",
+            "for": "5m",
+            "frequency": "1m",
+            "handler": 1,
+            "message": "Platform: OnPrem WSDC\nApplication: WFM\nService: wfmforecast\nNamespace: daci-wfm-forecast-ns\nEndpoint: getActualHoursByDepartment \nPriority: P1\nMessage: 5XX transactions threshold breached: please validate the service: and keep an eye\n\nhttps://grafana.wsdc-tlmy-prd01.carbon.lowes.com/d/iQ8n2ZfVz/wfm-forecast-nodejs-wsdc?tab=alert&editPanel=613&orgId=1&from=now-15m&to=now",
+            "name": "/getActualHoursByDepartment 5xx alert",
+            "noDataState": "keep_state",
+            "notifications": [
+              {
+                "uid": "aF4R4sA7k"
+              }
+            ]
+          },
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 18,
+            "y": 13
+          },
+          "hiddenSeries": false,
+          "id": 613,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(rate(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=\"/getActualHoursByDepartment\", status=~\"5.*\"}[1m]))by (status) OR vector(0)\r",
+              "interval": "",
+              "legendFormat": "{{status}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 5,
+              "visible": true
+            }
+          ],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "/getActualHoursByDepartment 5xx",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "/getActualHoursByDepartment",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 615,
+      "panels": [
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 14
+          },
+          "id": 616,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "text": {},
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.5.17",
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getScheduledHoursByDepartment\", status=\"200\",}[5m])) / sum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getScheduledHoursByDepartment\"}[5m])) * 100",
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "/getScheduledHoursByDepartment Availability",
+          "type": "stat"
+        },
+        {
+          "alert": {
+            "alertRuleTags": {
+              "Application": "WFM Forecast",
+              "Metric": "Latency",
+              "Paging_Priority": "P1",
+              "Product": "WFM forecast",
+              "Service": "getScheduledHoursByDepartment",
+              "Support_Service": "ERE-McLaren"
+            },
+            "conditions": [
+              {
+                "evaluator": {
+                  "params": [
+                    30000
+                  ],
+                  "type": "gt"
+                },
+                "operator": {
+                  "type": "and"
+                },
+                "query": {
+                  "params": [
+                    "A",
+                    "5m",
+                    "now"
+                  ]
+                },
+                "reducer": {
+                  "params": [],
+                  "type": "avg"
+                },
+                "type": "query"
+              }
+            ],
+            "executionErrorState": "keep_state",
+            "for": "5m",
+            "frequency": "1m",
+            "handler": 1,
+            "message": "Platform: OnPrem WSDC\nApplication: WFM\nService: wfmforecast\nNamespace: daci-wfm-forecast-ns\nEndpoint: getScheduledHoursByDepartment \nPriority: P1\nMessage: Latency transactions threshold breached: please validate the service: and keep an eye\n\nhttps://grafana.wsdc-tlmy-prd01.carbon.lowes.com/d/iQ8n2ZfVz/wfm-forecast-nodejs-wsdc?tab=alert&editPanel=617&orgId=1&from=now-15m&to=now",
+            "name": "/getScheduledHoursByDepartment Latency alert",
+            "noDataState": "ok",
+            "notifications": [
+              {
+                "uid": "aF4R4sA7k"
+              }
+            ]
+          },
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 6,
+            "y": 14
+          },
+          "hiddenSeries": false,
+          "id": 617,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null as zero",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "(quantile(0.9,(sum(increase(responses_sum{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getScheduledHoursByDepartment\"}[5m])) /\r\nsum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getScheduledHoursByDepartment\"}[5m])))))\r",
+              "interval": "",
+              "legendFormat": "P90",
+              "refId": "A"
+            },
+            {
+              "exemplar": true,
+              "expr": "(quantile(0.95,(sum(increase(responses_sum{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getScheduledHoursByDepartment\"}[5m]))/\r\nsum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getScheduledHoursByDepartment\"}[5m])))))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "P95",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "(quantile(0.99,(sum(increase(responses_sum{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\",path=~\".*​​/getScheduledHoursByDepartment\"}[5m]))/\r\nsum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getScheduledHoursByDepartment\"}[5m])))))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "P99",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 30000,
+              "visible": true
+            }
+          ],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "/getScheduledHoursByDepartment Latency",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:2610",
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:2611",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "alert": {
+            "alertRuleTags": {
+              "Application": "WFM Forecast",
+              "Metric": "4xx",
+              "Paging_Priority": "P3",
+              "Product": "WFM Forecast",
+              "Service": "getScheduledHoursByDepartment",
+              "Support_Service": "ERE-McLaren"
+            },
+            "conditions": [
+              {
+                "evaluator": {
+                  "params": [
+                    5
+                  ],
+                  "type": "gt"
+                },
+                "operator": {
+                  "type": "and"
+                },
+                "query": {
+                  "params": [
+                    "A",
+                    "5m",
+                    "now"
+                  ]
+                },
+                "reducer": {
+                  "params": [],
+                  "type": "avg"
+                },
+                "type": "query"
+              }
+            ],
+            "executionErrorState": "keep_state",
+            "for": "5m",
+            "frequency": "1m",
+            "handler": 1,
+            "message": "Platform: OnPrem WSDC\nApplication: WFM\nService: wfmforecast\nNamespace: daci-wfm-forecast-ns\nEndpoint: getScheduledHoursByDepartment \nPriority: P1\nMessage: 4XX transactions threshold breached: please validate the service: and keep an eye\n\nhttps://grafana.wsdc-tlmy-prd01.carbon.lowes.com/d/iQ8n2ZfVz/wfm-forecast-nodejs-wsdc?tab=alert&editPanel=618&orgId=1&from=now-15m&to=now",
+            "name": "/getScheduledHoursByDepartment 4XX alert",
+            "noDataState": "keep_state",
+            "notifications": [
+              {
+                "uid": "aF4R4sA7k"
+              }
+            ]
+          },
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 12,
+            "y": 14
+          },
+          "hiddenSeries": false,
+          "id": 618,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(rate(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getScheduledHoursByDepartment\",status=~\"4.*\"}[1m]))by (status) OR vector (0)",
+              "interval": "",
+              "legendFormat": "{{status}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 5,
+              "visible": true
+            }
+          ],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "/getScheduledHoursByDepartment 4XX",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "alert": {
+            "alertRuleTags": {
+              "Application": "WFM Forecast",
+              "Metric": "5xx",
+              "Paging_priority": "P1",
+              "Product": "WFM Forecast",
+              "Service": "getScheduledHoursByDepartment",
+              "Support_Service": "ERE-McLaren"
+            },
+            "conditions": [
+              {
+                "evaluator": {
+                  "params": [
+                    5
+                  ],
+                  "type": "gt"
+                },
+                "operator": {
+                  "type": "and"
+                },
+                "query": {
+                  "params": [
+                    "A",
+                    "5m",
+                    "now"
+                  ]
+                },
+                "reducer": {
+                  "params": [],
+                  "type": "avg"
+                },
+                "type": "query"
+              }
+            ],
+            "executionErrorState": "keep_state",
+            "for": "5m",
+            "frequency": "1m",
+            "handler": 1,
+            "message": "Platform: OnPrem WSDC\nApplication: WFM\nService: wfmforecast\nNamespace: daci-wfm-forecast-ns\nEndpoint: getScheduledHoursByDepartment \nPriority: P1\nMessage: 5XX transactions threshold breached: please validate the service: and keep an eye",
+            "name": "/getScheduledHoursByDepartment 5xx alert",
+            "noDataState": "ok",
+            "notifications": [
+              {
+                "uid": "aF4R4sA7k"
+              }
+            ]
+          },
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 18,
+            "y": 14
+          },
+          "hiddenSeries": false,
+          "id": 619,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(rate(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=\"/getScheduledHoursByDepartment\", status=~\"5.*\"}[1m]))by (status) OR vector(0)\r",
+              "interval": "",
+              "legendFormat": "{{status}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 5,
+              "visible": true
+            }
+          ],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "/getScheduledHoursByDepartment 5xx",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "/getScheduledHoursByDepartment",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 620,
+      "panels": [
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 15
+          },
+          "id": 621,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "text": {},
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.5.17",
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getFooter\", status=\"200\",}[5m])) / sum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getFooter\"}[5m])) * 100",
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "/getFooter Availability ",
+          "type": "stat"
+        },
+        {
+          "alert": {
+            "alertRuleTags": {
+              "Metric": "Latency",
+              "Paging_priority": "P1",
+              "Product": "WFM Forecast",
+              "Service": "getFooter",
+              "Support_Service": "WFM Forecast"
+            },
+            "conditions": [
+              {
+                "evaluator": {
+                  "params": [
+                    5000
+                  ],
+                  "type": "gt"
+                },
+                "operator": {
+                  "type": "and"
+                },
+                "query": {
+                  "params": [
+                    "A",
+                    "5m",
+                    "now"
+                  ]
+                },
+                "reducer": {
+                  "params": [],
+                  "type": "avg"
+                },
+                "type": "query"
+              }
+            ],
+            "executionErrorState": "keep_state",
+            "for": "5m",
+            "frequency": "1m",
+            "handler": 1,
+            "message": "Platform: OnPrem WSDC\nApplication: WFM\nService: wfmforecast\nNamespace: daci-wfm-forecast-ns\nEndpoint: getFooter \nPriority: P1\nMessage: Latency transactions threshold breached: please validate the service: and keep an eye",
+            "name": "/getFooter Latency alert",
+            "noDataState": "ok",
+            "notifications": [
+              {
+                "uid": "aF4R4sA7k"
+              }
+            ]
+          },
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 6,
+            "y": 15
+          },
+          "hiddenSeries": false,
+          "id": 622,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null as zero",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "(quantile(0.9,(sum(increase(responses_sum{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getFooter\"}[5m])) /\r\nsum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getFooter\"}[5m])))))\r",
+              "interval": "",
+              "legendFormat": "P90",
+              "refId": "A"
+            },
+            {
+              "exemplar": true,
+              "expr": "(quantile(0.95,(sum(increase(responses_sum{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getFooter\"}[5m]))/\r\nsum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getFooter\"}[5m])))))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "P95",
+              "refId": "B"
+            },
+            {
+              "exemplar": true,
+              "expr": "(quantile(0.99,(sum(increase(responses_sum{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\",path=~\".*​​/getStatusByPage\"}[5m]))/\r\nsum(increase(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getFooter\"}[5m])))))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "P99",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 5000,
+              "visible": true
+            }
+          ],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "/getFooter Latency",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:2438",
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:2439",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "alert": {
+            "alertRuleTags": {
+              "Application": "WFM Forecast",
+              "Metric": "4xx",
+              "Paging_priority": "P1",
+              "Product": "WFM forecast",
+              "Service": "getFooter",
+              "Support_Service": "ERE-McLaren"
+            },
+            "conditions": [
+              {
+                "evaluator": {
+                  "params": [
+                    5
+                  ],
+                  "type": "gt"
+                },
+                "operator": {
+                  "type": "and"
+                },
+                "query": {
+                  "params": [
+                    "A",
+                    "5m",
+                    "now"
+                  ]
+                },
+                "reducer": {
+                  "params": [],
+                  "type": "avg"
+                },
+                "type": "query"
+              }
+            ],
+            "executionErrorState": "keep_state",
+            "for": "5m",
+            "frequency": "1m",
+            "handler": 1,
+            "message": "Platform: OnPrem WSDC\nApplication: WFM\nService: wfmforecast\nNamespace: daci-wfm-forecast-ns\nEndpoint: getFooter \nPriority: P1\nMessage: 4XX transactions threshold breached : please validate the service : and keep an eye",
+            "name": "/getFooter 4XX alert",
+            "noDataState": "ok",
+            "notifications": [
+              {
+                "uid": "aF4R4sA7k"
+              }
+            ]
+          },
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 12,
+            "y": 15
+          },
+          "hiddenSeries": false,
+          "id": 623,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(rate(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=~\".*/getFooter\",status=~\"4.*\"}[1m]))by (status) OR vector (0)",
+              "interval": "",
+              "legendFormat": "{{status}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 5,
+              "visible": true
+            }
+          ],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "/getFooter 4XX",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "alert": {
+            "alertRuleTags": {
+              "Application": "WFM Forecast",
+              "Metric": "5xx",
+              "Paging_Priority": "P1",
+              "Product": "WFM Forecast",
+              "Service": "getFooter",
+              "Support_Service": "ERE-McLaren"
+            },
+            "conditions": [
+              {
+                "evaluator": {
+                  "params": [
+                    5
+                  ],
+                  "type": "gt"
+                },
+                "operator": {
+                  "type": "and"
+                },
+                "query": {
+                  "params": [
+                    "A",
+                    "5m",
+                    "now"
+                  ]
+                },
+                "reducer": {
+                  "params": [],
+                  "type": "avg"
+                },
+                "type": "query"
+              }
+            ],
+            "executionErrorState": "keep_state",
+            "for": "5m",
+            "frequency": "1m",
+            "handler": 1,
+            "message": "Platform: OnPrem WSDC\nApplication: WFM\nService: wfmforecast\nNamespace: daci-wfm-forecast-ns\nEndpoint: getFooter \nPriority: P1\nMessage: 5XX transactions threshold breached : please validate the service : and keep an eye",
+            "name": "/getFooter 5xx alert",
+            "noDataState": "ok",
+            "notifications": [
+              {
+                "uid": "aF4R4sA7k"
+              }
+            ]
+          },
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 18,
+            "y": 15
+          },
+          "hiddenSeries": false,
+          "id": 624,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(rate(responses_count{namespace=\"daci-wfm-forecast-ns\", pod_name=~\"daci-wfm-forecast-.*\", path=\"/getStatusByPage\", status=~\"5.*\"}[1m]))by (status) OR vector(0)\r",
+              "interval": "",
+              "legendFormat": "{{status}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 5,
+              "visible": true
+            }
+          ],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "/getFooter 5xx",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "/getFooter",
+      "type": "row"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "daci-wfm-forecast-ns",
+          "value": "daci-wfm-forecast-ns"
+        },
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "namespace",
+        "options": [
+          {
+            "selected": true,
+            "text": "daci-wfm-forecast-ns",
+            "value": "daci-wfm-forecast-ns"
+          }
+        ],
+        "query": "daci-wfm-forecast-ns",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "daci-wfm-forecast-ns",
+          "value": "daci-wfm-forecast-ns"
+        },
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "pod",
+        "options": [
+          {
+            "selected": true,
+            "text": "daci-wfm-forecast-ns",
+            "value": "daci-wfm-forecast-ns"
+          }
+        ],
+        "query": "daci-wfm-forecast-ns",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "NodeJs-Forecast-WFM-WSDC",
+  "uid": "urOS4HB4z",
+  "version": 20
+}

@@ -15,24 +15,38 @@
   </head>
   <body>
     <div class="container">
-      <div class="input-group">
-        <label class="label" for="fileInput">Select Grafana JSON file:</label>
-        <input type="file" id="fileInput" accept=".json">
-      </div>
-  
-      <div class="input-group">
-        <label class="label" for="panelNames">Panel Names:</label>
-        <select id="panelNames" class="select-box">
-          <option value="">Select a panel name</option>
-        </select>
-      </div>
-  
-      <div class="input-group">
-        <label class="label" for="panelQuery">Selected Panel Query:</label>
-        <textarea id="panelQuery" class="text-area"></textarea>
-      </div>
+      <form>
+        <div class="form-group">
+          <label for="fileInput">Select a Grafana JSON file:</label>
+          <input type="file" id="fileInput" accept=".json">
+          <label for="fileInput" class="file-input-label"><i class="fas fa-upload"></i>Browse</label>
+          <label id="fileName"></label>
+        </div>
+        <div class="form-group">
+          <label for="panelNames">Rows:</label>
+          <select id="rowname">
+            <option value="">Select Row:</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="panelNames">Panel Names:</label>
+          <select id="panelNames">
+            <option value="">Select Panel:</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="panelQuery">Selected Query:</label>
+          <select id="panelQuery" size="5">
+          </select>
+          
+        </div>
+        <div class="form-group">
+          <label for="queryText">Query Text:</label>
+          <textarea id="queryText" rows="8" placeholder="query..."></textarea>
+        </div>
+        <button class="btn" disabled="true">Save</button>
+      </form>
     </div>
-
   </body>
   <script src="./renderer.js"></script>
 </html>

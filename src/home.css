@@ -1,81 +1,89 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
-    padding: 0;
-}
+    background-color: #f5f5f5;
+    font-family: "Montserrat", sans-serif;
+  }
 
-.container {
-    max-width: 1350px;
+  .container {
+    max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 50px;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    border-radius: 10px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  }
 
-.title {
-    text-align: center;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-group {
     margin-bottom: 30px;
-    color: #003366;
-}
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+  }
 
-.input-group {
-    margin-bottom: 20px;
-}
-
-.label {
+  label {
+    font-weight: 700;
+    margin-bottom: 10px;
     display: block;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #003366;
-}
+    text-align: left;
+  }
 
-.file-input {
-    display: inline-block;
-    background-color: #f2f2f2;
-    color: #003366;
-    font-size: 16px;
-    font-weight: bold;
+  input[type="file"] {
+    display: none;
+  }
+
+  .file-input-label {
     padding: 10px;
+    background-color: #007bff;
+    color: #fff;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
+  }
 
-.file-input:hover {
-    background-color: #003366;
-    color: #fff;
-}
+  .file-input-label:hover {
+    background-color: #0062cc;
+  }
 
-.select-box {
+  select {
     display: block;
     width: 100%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    background-color: #fff;
     font-size: 16px;
-    color: #003366;
-    background-color: #f2f2f2;
-    transition: border-color 0.3s ease;
+    appearance: none;
     cursor: pointer;
-}
+  }
 
-.select-box:hover {
-    border-color: #003366;
-}
-
-.text-area {
+  textarea {
     display: block;
     width: 100%;
+    height: 30%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    background-color: #fff;
     font-size: 16px;
-    color: #003366;
-    background-color: #f2f2f2;
     resize: none;
-}
+    cursor: default;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background-color: #0062cc;
+  }
