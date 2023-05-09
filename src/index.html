@@ -29,22 +29,27 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="panelNames">Panel Names:</label>
+          <label for="panelNames">Panels:</label>
           <select id="panelNames">
             <option value="">Select Panel:</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="panelQuery">Selected Query:</label>
+          <label for="panelQuery">Query(s):</label>
           <select id="panelQuery" size="5">
           </select>
+
+          <label for="alertTagText">Alert Tag:</label>
+          <textarea id="alertTagText" rows="5" placeholder="alert tags..."></textarea>
+          <label for="alertConditionText">Alert Condition:</label>
+          <textarea id="alertConditionText" rows="5" placeholder="alert conditions..."></textarea>
+          <label for="alertMsgText">Alert Message:</label>
+          <textarea id="alertMsgText" rows="5" placeholder="alert message..."></textarea>
+
+          <label for="queryText">Query Expression:</label>
+          <textarea id="queryText" rows="8" placeholder="query..."></textarea>
           
         </div>
-        <div class="form-group">
-          <label for="queryText">Query Text:</label>
-          <textarea id="queryText" rows="8" placeholder="query..."></textarea>
-        </div>
-        <button class="btn" disabled="true">Save</button>
       </form>
     </div>
   </body>
