@@ -1,3 +1,6 @@
+const { ipcRenderer } = require('electron')
+const fs  = require('fs')
+
 //select the HTML elements
 const rowname = document.getElementById("rowname");
 const fileDialog = document.getElementById("fileInput");
@@ -8,7 +11,9 @@ const fileNameLabel = document.getElementById("fileName");
 const alertTagText = document.getElementById("alertTagText");
 const alertConditionText = document.getElementById("alertConditionText");
 const alertMsgText = document.getElementById("alertMsgText");
+const saveButton = document.getElementById("saveButton");
 
+var fulljson = ""
 //store the panel/query data for use later on
 var rowList = [];
 var panelList = [];
@@ -46,22 +51,24 @@ fileDialog.addEventListener('change', () => {
       const json = JSON.stringify(data.panels[2]);
       console.log(`data : ${json}`);
 
+      fulljson = data;
+
       // Use a filter function to find the non-row panels
       const non_row_panels = data.panels.filter(panel => panel.type !== 'alertlist');
-      var counterRow = 1;
+      var counterRow = 0;
 
       non_row_panels.forEach(row => {
 
         if (row.type == "row") {
-          var counterPanel = 1;
+          var counterPanel = 0;
           var row_name = row.title;
           console.log(`Row name: ${row_name}`);
           console.log(`COunter row: ${counterRow}`);
           rowList.push({ value: counterRow, text: row_name });
 
           row["panels"].forEach(panel => {
-            var counterQuery = 1;
-            var counterAlert = 1;
+            var counterQuery = 0;
+            var counterAlert = 0;
 
             var panel_name = panel.title;
             console.log(`Panel name: ${panel_name}`);
@@ -74,7 +81,6 @@ fileDialog.addEventListener('change', () => {
               counterQuery++;
             });
 
-            
             var alert = panel["alert"];
             var alertTag = "";
             var alertCond = "";
@@ -186,6 +192,41 @@ panelQuery.addEventListener('change', event => {
   // Update the listbox and query field
   selectedPanelValues.forEach(option => {
     queryText.value = option.text;
+  });
+
+});
+
+saveButton.addEventListener('click', event => {
+  console.log("query : " + queryText.value)
+
+  fulljson.panels.filter(panel => panel.type !== 'alertlist').forEach(row => {
+    if (row.type == "row" && row.title == rowList[selectedRow].text){
+      row["panels"].forEach(panel => {
+        var result = panelList.find(item => item.row == selectedRow && item.value == selectedPanel);
+        if(panel.title == result.text){
+          panel["targets"].forEach(query => {
+            var result1 = queryList.find(item => item.row == selectedRow && item.panel == selectedPanel && item.value == selectedQuery);
+            if(query["refId"] == result1.queryName  && query["expr"] == result1.text){
+              query["expr"] = queryText.value;
+            }
+          });
+        }
+      });
+    }
+  });
+
+  // file path check
+  const file = fileDialog.files[0];
+  const fileName = file.path;
+  fileNameLabel.innerHTML = fileName;
+  console.log(file.path)
+
+  jsonString = JSON.stringify(fulljson);
+
+  fs.writeFile(file.path, jsonString, (err) => {
+    if (err) {
+      console.error('Error saving file:', err);
+    }
   });
 
 });
