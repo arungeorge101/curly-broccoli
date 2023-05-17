@@ -109,8 +109,8 @@ fileDialog.addEventListener('change', () => {
             counterPanel++;
             counterAlert++;
           });
+          counterRow++;
         }
-        counterRow++;
       });
 
       rowname.options.length = 1;
