@@ -41,6 +41,7 @@ fileDialog.addEventListener('change', () => {
   rowList = [];
   panelList = [];
   queryList = [];
+  alertList = [];
 
   // Load the Grafana JSON file
   fetch(fileName)
@@ -66,49 +67,49 @@ fileDialog.addEventListener('change', () => {
           console.log(`COunter row: ${counterRow}`);
           rowList.push({ value: counterRow, text: row_name });
 
-          row["panels"].forEach(panel => {
-            var counterQuery = 0;
-            var counterAlert = 0;
+            row["panels"].forEach(panel => {
+              var counterQuery = 0;
+              var counterAlert = 0;
 
-            var panel_name = panel.title;
-            console.log(`Panel name: ${panel_name}`);
-            panelList.push({ value: counterPanel, row: counterRow, text: panel_name });
+              var panel_name = panel.title;
+              console.log(`Panel name: ${panel_name}`);
+              panelList.push({ value: counterPanel, row: counterRow, text: panel_name });
 
-            panel["targets"].forEach(query => {
-              query_name = query["refId"];
-              query_text = query["expr"];
-              queryList.push({ value: counterQuery, row: counterRow, panel: counterPanel, queryName: query_name, text: query_text });
-              counterQuery++;
-            });
+              panel["targets"].forEach(query => {
+                query_name = query["refId"];
+                query_text = query["expr"];
+                queryList.push({ value: counterQuery, row: counterRow, panel: counterPanel, queryName: query_name, text: query_text });
+                counterQuery++;
+              });
 
-            var alert = panel["alert"];
-            var alertTag = "";
-            var alertCond = "";
-            var alertMsg = "";
-            if(alert == undefined){
-              alert = "No Alert Defined";
-              alertTag = "No Alert Defined";
-              alertCond = "No Alert Defined";
-              alertMsg = "No Alert Defined";
-            }
-            else{
-              alertTag = panel["alert"]["alertRuleTags"];
-              alertTag = JSON.stringify(alertTag);
-              console.log(`alert tag: ${alertTag}`);
+              var alert = panel["alert"];
+              var alertTag = "";
+              var alertCond = "";
+              var alertMsg = "";
+              if(alert == undefined){
+                alert = "No Alert Defined";
+                alertTag = "No Alert Defined";
+                alertCond = "No Alert Defined";
+                alertMsg = "No Alert Defined";
+              }
+              else{
+                alertTag = panel["alert"]["alertRuleTags"];
+                alertTag = JSON.stringify(alertTag);
+                console.log(`alert tag: ${alertTag}`);
+                
+                alertCond = panel["alert"]["conditions"];
+                alertCond = JSON.stringify(alertCond);
+                console.log(`alert condition: ${alertCond}`);
+
+                alertMsg = panel["alert"]["message"];
+                alertMsg = JSON.stringify(alertMsg);
+                console.log(`alert message: ${alertMsg}`);
+              }
               
-              alertCond = panel["alert"]["conditions"];
-              alertCond = JSON.stringify(alertCond);
-              console.log(`alert condition: ${alertCond}`);
-
-              alertMsg = panel["alert"]["message"];
-              alertMsg = JSON.stringify(alertMsg);
-              console.log(`alert message: ${alertMsg}`);
-            }
-            
-            alertList.push({value: counterAlert, row: counterRow, panel: counterPanel, alertTag: alertTag, alertCond: alertCond, alertMsg: alertMsg});
-            counterPanel++;
-            counterAlert++;
-          });
+              alertList.push({value: counterAlert, row: counterRow, panel: counterPanel, alertTag: alertTag, alertCond: alertCond, alertMsg: alertMsg});
+              counterPanel++;
+              counterAlert++;
+            });
           counterRow++;
         }
       });
@@ -204,12 +205,29 @@ saveButton.addEventListener('click', event => {
       row["panels"].forEach(panel => {
         var result = panelList.find(item => item.row == selectedRow && item.value == selectedPanel);
         if(panel.title == result.text){
+          //Update query
           panel["targets"].forEach(query => {
             var result1 = queryList.find(item => item.row == selectedRow && item.panel == selectedPanel && item.value == selectedQuery);
             if(query["refId"] == result1.queryName  && query["expr"] == result1.text){
               query["expr"] = queryText.value;
             }
           });
+
+          var alert = panel["alert"];
+          if(alert == undefined){
+            console.log("No Alerts defined, nothing to save!!");
+          }
+          else{
+            if(alertTagText.value != "No Alert Defined"){
+              panel["alert"]["alertRuleTags"] = JSON.parse(alertTagText.value);
+            }
+            if(alertConditionText.value != "No Alert Defined"){
+              panel["alert"]["conditions"] = JSON.parse(alertConditionText.value);
+            }
+            if(alertMsgText.value != "No Alert Defined"){
+              panel["alert"]["message"] = JSON.parse(alertMsgText.value);
+            }
+          }
         }
       });
     }
@@ -227,6 +245,7 @@ saveButton.addEventListener('click', event => {
     if (err) {
       console.error('Error saving file:', err);
     }
+    
   });
 
 });
