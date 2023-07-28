@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain} = require('electron')
+const { app, BrowserWindow, ipcMain, dialog} = require('electron')
 const path = require('path')
 const fs = require('fs');
 
@@ -14,6 +14,10 @@ const createWindow = () => {
   })
   win.loadFile(path.join(__dirname, 'index.html'))
 }
+const mainWindow = BrowserWindow.getFocusedWindow();
+ipcMain.handle("showDialog", (e, message) => {
+    dialog.showMessageBox(mainWindow, { message });
+});
 
 app.whenReady().then(createWindow)
   

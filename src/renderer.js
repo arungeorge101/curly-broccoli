@@ -215,16 +215,26 @@ saveButton.addEventListener('click', event => {
 
           var alert = panel["alert"];
           if(alert == undefined){
-            console.log("No Alerts defined, nothing to save!!");
+            console.log("No Alerts defined, add new one if added!!");
+            panel.alert = {}
+            if(alertTagText.value != "No Alert Defined" && alertTagText.value != "undefined"){
+              panel.alert.alertRuleTags = JSON.parse(alertTagText.value);
+            }
+            if(alertConditionText.value != "No Alert Defined" && alertConditionText.value != "undefined"){
+              panel.alert.conditions = JSON.parse(alertConditionText.value);
+            }
+            if(alertMsgText.value != "No Alert Defined" && alertMsgText.value != "undefined"){
+              panel.alert.message = JSON.parse(alertMsgText.value);
+            }
           }
           else{
-            if(alertTagText.value != "No Alert Defined"){
+            if(alertTagText.value != "No Alert Defined" && alertTagText.value != "undefined"){
               panel["alert"]["alertRuleTags"] = JSON.parse(alertTagText.value);
             }
-            if(alertConditionText.value != "No Alert Defined"){
+            if(alertConditionText.value != "No Alert Defined" && alertConditionText.value != "undefined"){
               panel["alert"]["conditions"] = JSON.parse(alertConditionText.value);
             }
-            if(alertMsgText.value != "No Alert Defined"){
+            if(alertMsgText.value != "No Alert Defined" && alertMsgText.value != "undefined"){
               panel["alert"]["message"] = JSON.parse(alertMsgText.value);
             }
           }
@@ -245,7 +255,6 @@ saveButton.addEventListener('click', event => {
     if (err) {
       console.error('Error saving file:', err);
     }
-    
+    ipcRenderer.invoke("showDialog", "File Saved!!!");
   });
-
 });
