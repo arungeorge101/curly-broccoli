@@ -2,68 +2,117 @@
 <html>
 
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
-  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
   <title>ERE Grafana Parser - GraphERE</title>
-  <link rel="stylesheet" href="./home.css">
+  <link rel="stylesheet" href="./bulma.css" />
+  <script src="https://kit.fontawesome.com/595cddcfd4.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="column">
-        <label for="fileInput">Select a Grafana JSON file:</label>
-        <input type="file" id="fileInput" accept=".json">
-        <label for="fileInput" class="file-input-label"><i class="fas fa-upload"></i>Browse</label>
-        <label id="fileName" class="fileName"></label>
+  <section class="section has-background-link">
+    <div class="container">
 
-        <br />
-        <br />
+      <div class="row">
+        <div class="columns">
+          <div class="column">
+            
+              <label class="label subtitle">Select a Grafana JSON file:</label>
+              <div class="file">
+                <label class="file-label">
+                  <input class="file-input" id="fileInput" type="file" name="resume">
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">
+                      Choose a file…
+                    </span>
+                    <label id="fileName" class="fileName"></label>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <button id="saveButton" type="button" class="">Save</button>
+          </div>
 
-        <label for="panelNames">Rows:</label>
-        <select id="rowname" class="rowname">
-          <option value="">Select Row:</option>
-        </select>
 
-        <br />
+          <div class="column is-vertical">
+            <div class="box m-4" style="height: 120px;">
+              <div class="row">
+                <label class="label subtitle">Selectors</label>
+              </div>
+              <div class="row">
+                <div class="columns">
+                  <div class="column">
+                    <label for="panelNames">Rows:</label>
+                    <div class="control has-icons-left">
+                      <div class="select is-normal">
+                        <select id="rowname" style="width:300px;">
+                          <option value="">Select Row:</option>
+                        </select>
+                      </div>
+                      <span class="icon is-medium is-left">
+                        <i class="fa-solid fa-table-columns"></i>
+                      </span>
+                    </div>
+                  </div>
 
-        <label for="panelNames">Panels:</label>
-        <select id="panelNames" class="panelNames">
-          <option value="">Select Panel:</option>
-        </select>
-
-        <br />
-        <br />
-        <br />
-
-        <button id="saveButton" type="button" class="btn">Save</button>
+                  <div class="column">
+                    <label for="panelNames">Panels:</label>
+                    <div class="control has-icons-left">
+                      <div class="select is-normal">
+                        <select id="panelNames" style="width:300px;">
+                          <option value="">Select Panel:</option>
+                        </select>
+                      </div>
+                      <span class="icon is-medium is-left">
+                        <i class="fa-solid fa-object-group"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="column">
+      <div class="row">
+        <div class="box m-4">
+          <label for="panelQuery">Query(s):</label>
+          <select id="panelQuery" size="5">
+          </select>
 
-        <label for="panelQuery">Query(s):</label>
-        <select id="panelQuery" size="5">
-        </select>
-
-        <br />
-
-        <label for="queryText">Query Expression:</label>
-        <textarea id="queryText" rows="12" placeholder="query..."></textarea>
+          <label for="queryText">Query Expression:</label>
+          <textarea id="queryText" rows="12" placeholder="query..."></textarea>
+        </div>
       </div>
 
-      <div class="column">
-        <label for="alertTagText">Alert Tag:</label>
-        <textarea id="alertTagText" rows="7" placeholder="alert tags..."></textarea>
-        <br />
-        <label for="alertConditionText">Alert Condition:</label>
-        <textarea id="alertConditionText" rows="5" placeholder="alert conditions..."></textarea>
-        <br />
-        <label for="alertMsgText">Alert Message:</label>
-        <textarea id="alertMsgText" rows="7" placeholder="alert message..."></textarea>
+      <div class="row">
+        <div class="box m-4">
+          <label for="alertTagText">Alert Tag:</label>
+          <textarea id="alertTagText" rows="7" placeholder="alert tags..."></textarea>
+          <br />
+          <label for="alertConditionText">Alert Condition:</label>
+          <textarea id="alertConditionText" rows="5" placeholder="alert conditions..."></textarea>
+          <br />
+          <label for="alertMsgText">Alert Message:</label>
+          <textarea id="alertMsgText" rows="7" placeholder="alert message..."></textarea>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="box m-4">
+          <button id="saveButton" type="button" class="">Save</button>
+        </div>
       </div>
     </div>
-  </div>
+    </div>
+    </div>
+  </section>
 </body>
 <script src="./renderer.js"></script>
 

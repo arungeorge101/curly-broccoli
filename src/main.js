@@ -8,7 +8,8 @@ const createWindow = () => {
     height: 900,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false,
+      webSecurity: false,
+      contextIsolation: true,
       preload: path.join(__dirname, 'preload.js')
     },
   })
