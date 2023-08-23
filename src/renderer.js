@@ -192,7 +192,10 @@ panelQuery.addEventListener('change', event => {
 
   // Update the listbox and query field
   selectedPanelValues.forEach(option => {
-    queryText.value = option.text;
+    const optionElement = document.createElement('option');
+    optionElement.value = option.value;
+    optionElement.text = option.text;
+    queryText.options.add(optionElement);
   });
 
 });
