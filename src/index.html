@@ -10,9 +10,8 @@
 </head>
 
 <body>
-  <section class="section has-background-link">
+  <section class="section has-background-light">
     <div class="container">
-
       <div class="row">
         <div class="columns">
           <div class="column is-vertical">
@@ -34,13 +33,13 @@
                             Choose a file…
                           </span>
                         </span>
-                        <span class="file-name" id="fileName"></span>
+                        <span class="file-name is-link" id="fileName"></span>
                       </label>
                     </div>
                   </div>
 
                   <div class="column" align="right">
-                    <button id="saveButton" type="button" class="button is-link is-medium">Save</button>
+                    <button id="saveButton" type="button" class="button is-medium is-link">Save</button>
                   </div>
                 </div>
               </div>
@@ -87,65 +86,67 @@
           </div>
         </div>
       </div>
-    </div>
 
+      <div class="row">
+        <div class="box m-4">
+          <div class="columns">
+            <div class="column is-one-quarter">
+              <label for="panelQuery" class="label subtitle">Query(s):</label>
+              <div class="control has-icons-left">
+                <div class="select is-normal">
+                  <select id="panelQuery" style="width:300px;">
+                    <option value="">Select Query:</option>
+                  </select>
+                </div>
+                <span class="icon is-medium is-left">
+                  <i class="fa-solid fa-object-group"></i>
+                </span>
+              </div>
+            </div>
 
-    <div class="row">
-      <div class="box m-4">
+            <div class="column">
+              <label for="queryText" class="label subtitle">Query Expression:</label>
+              <div class="field">
+                <div class="control">
+                  <textarea id="queryText" class="textarea is-normal has-fixed-size" placeholder="Query..."></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="columns">
-          <div class="column is-one-quarter">
-            <label for="panelQuery">Query(s):</label>
-            <div class="control has-icons-left">
-              <div class="select is-normal">
-                <select id="panelQuery" style="width:300px;">
-                  <option value="">Select Query:</option>
-                </select>
-              </div>
-              <span class="icon is-medium is-left">
-                <i class="fa-solid fa-object-group"></i>
-              </span>
-            </div>
-          </div>
-
           <div class="column">
-            <label for="queryText">Query Expression:</label>
-            <div class="field">
-              <div class="control">
-                <textarea id="queryText" class="textarea is-normal has-fixed-size" placeholder="Query..."></textarea>
+            <div class="box m-4">
+              <label for="alertTagText" class="label subtitle">Alert Tag:</label>
+              <div class="field">
+                <div class="control">
+                  <textarea id="alertTagText" class="textarea is-normal has-fixed-size"
+                    placeholder="alert tags..."></textarea>
+                </div>
+              </div>
+              <label for="alertConditionText" class="label subtitle">Alert Condition:</label>
+              <div class="field">
+                <div class="control">
+                  <textarea id="alertConditionText" class="textarea is-small has-fixed-size"
+                    placeholder="alert conditions..."></textarea>
+                </div>
+              </div>
+              <label for="alertMsgText" class="label subtitle">Alert Message:</label>
+              <div class="field">
+                <div class="control">
+                  <textarea id="alertMsgText" class="textarea is-small has-fixed-size"
+                    placeholder="alert message..."></textarea>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="columns">
-        <div class="column">
-          <div class="box m-4">
-            <label for="alertTagText">Alert Tag:</label>
-            <div class="field">
-              <div class="control">
-                <textarea id="alertTagText" class="textarea is-normal has-fixed-size" placeholder="alert tags..."></textarea>
-              </div>
-            </div>
-            <label for="alertConditionText">Alert Condition:</label>
-            <div class="field">
-              <div class="control">
-                <textarea id="alertConditionText" class="textarea is-normal has-fixed-size" placeholder="alert conditions..."></textarea>
-              </div>
-            </div>
-            <label for="alertMsgText">Alert Message:</label>
-            <div class="field">
-              <div class="control">
-                <textarea id="alertMsgText" class="textarea is-normal has-fixed-size" placeholder="alert message..."></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-
     </div>
     </div>
     </div>

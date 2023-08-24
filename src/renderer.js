@@ -1,5 +1,5 @@
 const { ipcRenderer } = require('electron')
-const fs  = require('fs')
+const fs = require('fs')
 
 //select the HTML elements
 const rowname = document.getElementById("rowname");
@@ -25,15 +25,23 @@ var selectedRow;
 var selectedPanel;
 var selectedQuery;
 
-/*
-Change event for the file dialog browser
-1. Parse the file and populate panels/query into the properties
-2. Update Panel Dropdown
-*/
-fileDialog.addEventListener('change', () => {
+function loadFileAfterSave(filepath) {
 
-  const fileName = fileDialog.files[0].path;
+  fulljson = ""
+  //store the panel/query data for use later on
+  rowList = [];
+  panelList = [];
+  queryList = [];
+  alertList = [];
+
+  //selected values
+  selectedRow = "";
+  selectedPanel = "";
+  selectedQuery = "";
+
+  const fileName = fileDialog.files[0].name;
   fileNameLabel.innerHTML = fileName;
+  filePath = filepath;
 
   console.log("Parsing data...");
 
@@ -44,7 +52,7 @@ fileDialog.addEventListener('change', () => {
   alertList = [];
 
   // Load the Grafana JSON file
-  fetch(fileName)
+  fetch(filePath)
     .then(response => response.json())
     .then(data => {
       console.log("Data loaded successfully");
@@ -67,49 +75,49 @@ fileDialog.addEventListener('change', () => {
           console.log(`COunter row: ${counterRow}`);
           rowList.push({ value: counterRow, text: row_name });
 
-            row["panels"].forEach(panel => {
-              var counterQuery = 0;
-              var counterAlert = 0;
+          row["panels"].forEach(panel => {
+            var counterQuery = 0;
+            var counterAlert = 0;
 
-              var panel_name = panel.title;
-              console.log(`Panel name: ${panel_name}`);
-              panelList.push({ value: counterPanel, row: counterRow, text: panel_name });
+            var panel_name = panel.title;
+            console.log(`Panel name: ${panel_name}`);
+            panelList.push({ value: counterPanel, row: counterRow, text: panel_name });
 
-              panel["targets"].forEach(query => {
-                query_name = query["refId"];
-                query_text = query["expr"];
-                queryList.push({ value: counterQuery, row: counterRow, panel: counterPanel, queryName: query_name, text: query_text });
-                counterQuery++;
-              });
-
-              var alert = panel["alert"];
-              var alertTag = "";
-              var alertCond = "";
-              var alertMsg = "";
-              if(alert == undefined){
-                alert = "No Alert Defined";
-                alertTag = "No Alert Defined";
-                alertCond = "No Alert Defined";
-                alertMsg = "No Alert Defined";
-              }
-              else{
-                alertTag = panel["alert"]["alertRuleTags"];
-                alertTag = JSON.stringify(alertTag);
-                console.log(`alert tag: ${alertTag}`);
-                
-                alertCond = panel["alert"]["conditions"];
-                alertCond = JSON.stringify(alertCond);
-                console.log(`alert condition: ${alertCond}`);
-
-                alertMsg = panel["alert"]["message"];
-                alertMsg = JSON.stringify(alertMsg);
-                console.log(`alert message: ${alertMsg}`);
-              }
-              
-              alertList.push({value: counterAlert, row: counterRow, panel: counterPanel, alertTag: alertTag, alertCond: alertCond, alertMsg: alertMsg});
-              counterPanel++;
-              counterAlert++;
+            panel["targets"].forEach(query => {
+              query_name = query["refId"];
+              query_text = query["expr"];
+              queryList.push({ value: counterQuery, row: counterRow, panel: counterPanel, queryName: query_name, text: query_text });
+              counterQuery++;
             });
+
+            var alert = panel["alert"];
+            var alertTag = "";
+            var alertCond = "";
+            var alertMsg = "";
+            if (alert == undefined) {
+              alert = "No Alert Defined";
+              alertTag = "No Alert Defined";
+              alertCond = "No Alert Defined";
+              alertMsg = "No Alert Defined";
+            }
+            else {
+              alertTag = panel["alert"]["alertRuleTags"];
+              alertTag = JSON.stringify(alertTag);
+              console.log(`alert tag: ${alertTag}`);
+
+              alertCond = panel["alert"]["conditions"];
+              alertCond = JSON.stringify(alertCond);
+              console.log(`alert condition: ${alertCond}`);
+
+              alertMsg = panel["alert"]["message"];
+              alertMsg = JSON.stringify(alertMsg);
+              console.log(`alert message: ${alertMsg}`);
+            }
+
+            alertList.push({ value: counterAlert, row: counterRow, panel: counterPanel, alertTag: alertTag, alertCond: alertCond, alertMsg: alertMsg });
+            counterPanel++;
+            counterAlert++;
+          });
           counterRow++;
         }
       });
@@ -122,6 +130,135 @@ fileDialog.addEventListener('change', () => {
         optionElement.text = option.text;
         rowname.options.add(optionElement);
       });
+      rowname.options[0].selected = true;
+
+      panelNames.options.length = 1;
+      panelNames.options[0].selected = true;
+    });
+
+  alertTagText.value = "";
+  alertConditionText.value = "";
+  alertMsgText.value = "";
+  queryText.value = "";
+
+  panelQuery.options.length = 1;
+  panelQuery.options[0].selected = true;
+}
+
+/*
+Change event for the file dialog browser
+1. Parse the file and populate panels/query into the properties
+2. Update Panel Dropdown
+*/
+fileDialog.addEventListener('change', () => {
+
+  fulljson = ""
+  //store the panel/query data for use later on
+  rowList = [];
+  panelList = [];
+  queryList = [];
+  alertList = [];
+
+  //selected values
+  selectedRow = "";
+  selectedPanel = "";
+  selectedQuery = "";
+
+  const fileName = fileDialog.files[0].name;
+  fileNameLabel.innerHTML = fileName;
+  filePath = fileDialog.files[0].path;
+
+  console.log("Parsing data...");
+
+  //clearing the lists
+  rowList = [];
+  panelList = [];
+  queryList = [];
+  alertList = [];
+
+  // Load the Grafana JSON file
+  fetch(filePath)
+    .then(response => response.json())
+    .then(data => {
+      console.log("Data loaded successfully");
+
+      const json = JSON.stringify(data.panels[2]);
+      console.log(`data : ${json}`);
+
+      fulljson = data;
+
+      // Use a filter function to find the non-row panels
+      const non_row_panels = data.panels.filter(panel => panel.type !== 'alertlist');
+      var counterRow = 0;
+
+      non_row_panels.forEach(row => {
+
+        if (row.type == "row") {
+          var counterPanel = 0;
+          var row_name = row.title;
+          console.log(`Row name: ${row_name}`);
+          console.log(`COunter row: ${counterRow}`);
+          rowList.push({ value: counterRow, text: row_name });
+
+          row["panels"].forEach(panel => {
+            var counterQuery = 0;
+            var counterAlert = 0;
+
+            var panel_name = panel.title;
+            console.log(`Panel name: ${panel_name}`);
+            panelList.push({ value: counterPanel, row: counterRow, text: panel_name });
+
+            panel["targets"].forEach(query => {
+              query_name = query["refId"];
+              query_text = query["expr"];
+              queryList.push({ value: counterQuery, row: counterRow, panel: counterPanel, queryName: query_name, text: query_text });
+              counterQuery++;
+            });
+
+            var alert = panel["alert"];
+            var alertTag = "";
+            var alertCond = "";
+            var alertMsg = "";
+            if (alert == undefined) {
+              alert = "No Alert Defined";
+              alertTag = "No Alert Defined";
+              alertCond = "No Alert Defined";
+              alertMsg = "No Alert Defined";
+            }
+            else {
+              alertTag = panel["alert"]["alertRuleTags"];
+              alertTag = JSON.stringify(alertTag);
+              console.log(`alert tag: ${alertTag}`);
+
+              alertCond = panel["alert"]["conditions"];
+              alertCond = JSON.stringify(alertCond);
+              console.log(`alert condition: ${alertCond}`);
+
+              alertMsg = panel["alert"]["message"];
+              alertMsg = JSON.stringify(alertMsg);
+              console.log(`alert message: ${alertMsg}`);
+            }
+
+            alertList.push({ value: counterAlert, row: counterRow, panel: counterPanel, alertTag: alertTag, alertCond: alertCond, alertMsg: alertMsg });
+            counterPanel++;
+            counterAlert++;
+          });
+          counterRow++;
+        }
+      });
+
+      rowname.options.length = 1;
+      // Update the row and query field
+      rowList.forEach(option => {
+        const optionElement = document.createElement('option');
+        optionElement.value = option.value;
+        optionElement.text = option.text;
+        rowname.options.add(optionElement);
+      });
+      rowname.options[0].selected = true;
+
+      panelNames.options.length = 1;
+      panelNames.options[0].selected = true;
 
     });
 })
@@ -138,14 +275,29 @@ rowname.addEventListener('change', event => {
 
   var selectedPanelValues = panelList.filter(obj => obj.row == selectedRow);
 
-  panelNames.options.length = 1;
-  // Update the listbox and query field
-  selectedPanelValues.forEach(option => {
-    const optionElement = document.createElement('option');
-    optionElement.value = option.value;
-    optionElement.text = option.text;
-    panelNames.options.add(optionElement);
-  });
+  if (selectedRow == "") {
+    panelNames.options.length = 1;
+    panelNames.options[0].selected = true;
+  }
+  else {
+    panelNames.options.length = 1;
+    // Update the listbox and query field
+    selectedPanelValues.forEach(option => {
+      const optionElement = document.createElement('option');
+      optionElement.value = option.value;
+      optionElement.text = option.text;
+      panelNames.options.add(optionElement);
+    });
+    panelNames.options[0].selected = true;
+  }
+
+  alertTagText.value = "";
+  alertConditionText.value = "";
+  alertMsgText.value = "";
+  queryText.value = "";
+
+  panelQuery.options.length = 1;
+  panelQuery.options[0].selected = true;
 });
 
 /*
@@ -161,22 +313,33 @@ panelNames.addEventListener('change', event => {
 
   var selectedPanelValues = queryList.filter(obj => (obj.panel == selectedPanel && obj.row == selectedRow));
 
-  panelQuery.options.length = 0;
-  // Update the listbox and query field
-  selectedPanelValues.forEach(option => {
-    const optionElement = document.createElement('option');
-    optionElement.value = option.value;
-    optionElement.text = option.queryName;
-    panelQuery.options.add(optionElement);
-  });
+  alertTagText.value = "";
+  alertConditionText.value = "";
+  alertMsgText.value = "";
+  queryText.value = "";
+  if (selectedPanel == "") {
+    panelQuery.options.length = 1;
+    panelQuery.options[0].selected = true;
+  }
+  else {
+    panelQuery.options.length = 1;
+    // Update the listbox and query field
+    selectedPanelValues.forEach(option => {
+      const optionElement = document.createElement('option');
+      optionElement.value = option.value;
+      optionElement.text = option.queryName;
+      panelQuery.options.add(optionElement);
+    });
+    panelQuery.options[0].selected = true;
 
-  selectedPanelValues = alertList.filter(obj => (obj.panel == selectedPanel && obj.row == selectedRow));
-  // Update the listbox and query field
-  selectedPanelValues.forEach(option => {
-    alertTagText.value = option.alertTag;
-    alertConditionText.value = option.alertCond;
-    alertMsgText.value = option.alertMsg;
-  });
+    selectedPanelValues = alertList.filter(obj => (obj.panel == selectedPanel && obj.row == selectedRow));
+    // Update the listbox and query field
+    selectedPanelValues.forEach(option => {
+      alertTagText.value = option.alertTag;
+      alertConditionText.value = option.alertCond;
+      alertMsgText.value = option.alertMsg;
+    });
+  }
 });
 
 /*
@@ -190,13 +353,16 @@ panelQuery.addEventListener('change', event => {
 
   var selectedPanelValues = queryList.filter(obj => (obj.panel == selectedPanel && obj.row == selectedRow && obj.value == selectedQuery));
 
-  // Update the listbox and query field
-  selectedPanelValues.forEach(option => {
-    const optionElement = document.createElement('option');
-    optionElement.value = option.value;
-    optionElement.text = option.text;
-    queryText.options.add(optionElement);
-  });
+  queryText.value = "";
+  if (selectedQuery == "") {
+    queryText.value = "";
+  }
+  else {
+    // Update the listbox and query field
+    selectedPanelValues.forEach(option => {
+      queryText.value = option.text;
+    });
+  }
 
 });
 
@@ -204,40 +370,40 @@ saveButton.addEventListener('click', event => {
   console.log("query : " + queryText.value)
 
   fulljson.panels.filter(panel => panel.type !== 'alertlist').forEach(row => {
-    if (row.type == "row" && row.title == rowList[selectedRow].text){
+    if (row.type == "row" && row.title == rowList[selectedRow].text) {
       row["panels"].forEach(panel => {
         var result = panelList.find(item => item.row == selectedRow && item.value == selectedPanel);
-        if(panel.title == result.text){
+        if (panel.title == result.text) {
           //Update query
           panel["targets"].forEach(query => {
             var result1 = queryList.find(item => item.row == selectedRow && item.panel == selectedPanel && item.value == selectedQuery);
-            if(query["refId"] == result1.queryName  && query["expr"] == result1.text){
+            if (query["refId"] == result1.queryName && query["expr"] == result1.text) {
               query["expr"] = queryText.value;
             }
           });
 
           var alert = panel["alert"];
-          if(alert == undefined){
+          if (alert == undefined) {
             console.log("No Alerts defined, add new one if added!!");
             panel.alert = {}
-            if(alertTagText.value != "No Alert Defined" && alertTagText.value != "undefined"){
+            if (alertTagText.value != "No Alert Defined" && alertTagText.value != "undefined") {
               panel.alert.alertRuleTags = JSON.parse(alertTagText.value);
             }
-            if(alertConditionText.value != "No Alert Defined" && alertConditionText.value != "undefined"){
+            if (alertConditionText.value != "No Alert Defined" && alertConditionText.value != "undefined") {
               panel.alert.conditions = JSON.parse(alertConditionText.value);
             }
-            if(alertMsgText.value != "No Alert Defined" && alertMsgText.value != "undefined"){
+            if (alertMsgText.value != "No Alert Defined" && alertMsgText.value != "undefined") {
               panel.alert.message = JSON.parse(alertMsgText.value);
             }
           }
-          else{
-            if(alertTagText.value != "No Alert Defined" && alertTagText.value != "undefined"){
+          else {
+            if (alertTagText.value != "No Alert Defined" && alertTagText.value != "undefined") {
               panel["alert"]["alertRuleTags"] = JSON.parse(alertTagText.value);
             }
-            if(alertConditionText.value != "No Alert Defined" && alertConditionText.value != "undefined"){
+            if (alertConditionText.value != "No Alert Defined" && alertConditionText.value != "undefined") {
               panel["alert"]["conditions"] = JSON.parse(alertConditionText.value);
             }
-            if(alertMsgText.value != "No Alert Defined" && alertMsgText.value != "undefined"){
+            if (alertMsgText.value != "No Alert Defined" && alertMsgText.value != "undefined") {
               panel["alert"]["message"] = JSON.parse(alertMsgText.value);
             }
           }
@@ -248,7 +414,7 @@ saveButton.addEventListener('click', event => {
 
   // file path check
   const file = fileDialog.files[0];
-  const fileName = file.path;
+  const fileName = file.name;
   fileNameLabel.innerHTML = fileName;
   console.log(file.path)
 
@@ -259,5 +425,7 @@ saveButton.addEventListener('click', event => {
       console.error('Error saving file:', err);
     }
     ipcRenderer.invoke("showDialog", "File Saved!!!");
+    loadFileAfterSave(file.path);
   });
+
 });
